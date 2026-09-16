@@ -1,0 +1,30 @@
+@use "lib/viewport";
+
+@include viewport.from(md) {
+  body.full-width-enabled {
+    .wrap,
+    &.has-sidebar-page .wrap {
+      max-width: unset;
+    }
+
+    #main-outlet-wrapper {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--d-wrap-padding-x);
+      padding: 0;
+
+      #main-outlet {
+        margin: 0 auto;
+        max-width: var(--d-max-width);
+        width: 100%;
+      }
+    }
+
+    &.has-sidebar-page #main-outlet-wrapper {
+      grid-template-columns: 1fr minmax(0, var(--d-max-width)) 1fr;
+    }
+
+    &:not(.has-sidebar-page) #main-outlet-wrapper {
+      grid-template-columns: 0 minmax(0, 1fr) 0;
+    }
+  }
+}

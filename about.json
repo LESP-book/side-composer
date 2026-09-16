@@ -1,0 +1,8 @@
+{
+  "name": "Side Composer",
+  "about_url": "https://github.com/LESP-book/side-composer",
+  "license_url": "https://github.com/LESP-book/side-composer/blob/main/LICENSE",
+  "authors": "LESP-book",
+  "theme_version": "0.1.0",
+  "component": true
+}

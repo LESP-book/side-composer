@@ -1,0 +1,4 @@
+en:
+  theme_metadata:
+    description: "Dock the composer to the right when space allows"
+  warning: "Hello admin! Side Composer requires the <a href='%{link}'>full-width component</a> to be installed"
