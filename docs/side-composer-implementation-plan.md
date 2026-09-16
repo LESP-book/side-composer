@@ -179,8 +179,9 @@ api.renderInOutlet("before-composer-toggles", ComposerPeekModeToggle)
 - `.full-width-enabled.peek-mode-active` 下才改 composer 与 grid；
 - composer 使用 `top: var(--header-offset)`；右侧和底部间距采用 `var(--main-grid-gap, 0.5em)`；
 - 这里的 fallback 是从 Horizon 抽离时唯一必要的布局适配：`--main-grid-gap` 由 Horizon 自己定义，官方 Full Width 当前并不定义它；不得因此复制 Horizon `main.scss`；
-- sidebar 打开时 composer 最大宽度为 `36.5vw`，main grid 按 Horizon 当前公式腾出右侧空间；
-- sidebar 关闭时 composer 最大宽度为 `46vw`，使用对应 grid 公式；
+- sidebar 打开时 composer 最大宽度为 `34vw`，main grid 预留 `35.5vw`，给正文保留更多空间；
+- sidebar 关闭时 composer 最大宽度为 `40vw`，main grid 预留 `42vw`，使用对应 grid 公式；
+- 中间 grid track 使用 `minmax(0, ...)`，并以容器 `100%` 和两侧 gap 计算可用宽度，避免 `100vw`（含滚动条）造成水平溢出；sidebar track 保持 `var(--d-sidebar-width)` 不被压缩；
 - peek 状态隐藏纵向 resize grippie；
 - `.reply-area` 高度撑满；
 - 仅在 `:not(.keyboard-visible)` 时将 peek composer 的 `height` 设为 `unset`；

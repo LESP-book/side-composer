@@ -48,9 +48,9 @@ BUNDLE_GEMFILE=/src/Gemfile bundle exec rubocop \
 bin/rspec /tmp/side-composer/spec/system/composer_peek_spec.rb --format progress
 ```
 
-结果：`8 examples, 0 failures`（最小等价 Full Width fixture，seed `46682`）。
-覆盖开关持久化、preview 协调、窄屏、fullscreen、sidebar 两种 grid、缺依赖
-staff/普通用户、普通 composer resize。
+结果：`10 examples, 0 failures`（最小等价 Full Width fixture，seed `23572`）。
+覆盖开关持久化、preview 协调、窄屏、fullscreen、sidebar 两种 grid、普通与无
+sidebar 的 Full Width viewport、缺依赖 staff/普通用户、普通 composer resize。
 
 使用官方 Full Width 组件执行：
 
@@ -59,7 +59,7 @@ SIDE_COMPOSER_FULL_WIDTH_COMPONENT_PATH=/tmp/full-width-upstream \
   bin/rspec /tmp/side-composer/spec/system/composer_peek_spec.rb --format progress
 ```
 
-结果：`8 examples, 0 failures`（seed `64098`）。
+结果：`10 examples, 0 failures`（官方组件，seed `27971`）。
 
 Core features smoke：
 
@@ -67,7 +67,7 @@ Core features smoke：
 bin/rspec /tmp/side-composer/spec/system/core_features_spec.rb --format progress
 ```
 
-结果：`19 examples, 0 failures`（seed `2679`）。
+结果：`19 examples, 0 failures`（seed `6010`）。
 
 ## 第 7 节验收映射
 
@@ -89,7 +89,7 @@ bin/rspec /tmp/side-composer/spec/system/core_features_spec.rb --format progress
 - Foundation + Full Width、sidebar 开/关：已用最小等价 fixture 和官方
   Full Width 各跑自动化；视觉人工回归未执行。
 - 亮/暗色、Markdown/rich-text、新建/回复/编辑/私信：本次未做人工矩阵。
-- 1280 边界、1366/1440 宽度：自动化覆盖 600、1380、1440；未逐项人工截图。
+- 1280 边界、1366/1440 宽度：自动化覆盖 600、1280、1380、1440；未逐项人工截图。
 - iPad Pro 13 英寸键盘、chat drawer、composer redesign 开/关：未执行。
 - RTL：未执行；当前实现按契约仍固定右侧，README 已记录该限制。
 - stable/latest 双版本线上验证、tag/release：未执行；本次只验证本地

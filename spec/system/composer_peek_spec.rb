@@ -123,21 +123,52 @@ RSpec.describe "Composer peek" do
     it "keeps the main content beside the composer as the sidebar changes" do
       open_composer
 
+      [1280, 1440].each do |width|
+        resize_window(width: width) do
+          set_sidebar_visibility(true)
+          side_composer.toggle_peek_mode
+          expect(side_composer).to be_sidebar_page
+
+          sidebar_layout = side_composer.layout_metrics
+          expect(sidebar_layout[:main_right]).to be <= sidebar_layout[:composer_left]
+          expect(sidebar_layout[:main_width]).to be >= sidebar_layout[:composer_width]
+          expect(sidebar_layout[:horizontal_overflow]).to be(false)
+
+          set_sidebar_visibility(false)
+          expect(side_composer.sidebar_page?).to be(false)
+
+          no_sidebar_layout = side_composer.layout_metrics
+          expect(no_sidebar_layout[:main_right]).to be <= no_sidebar_layout[:composer_left]
+          expect(no_sidebar_layout[:main_width]).to be >= no_sidebar_layout[:composer_width]
+          expect(no_sidebar_layout[:horizontal_overflow]).to be(false)
+
+          side_composer.toggle_peek_mode
+          expect(side_composer).to be_peek_mode_inactive
+        end
+      end
+    end
+
+    it "keeps the full-width layout inside the viewport with the sidebar" do
+      open_composer
+
       resize_window(width: 1440) do
         set_sidebar_visibility(true)
-        side_composer.toggle_peek_mode
-        expect(side_composer).to be_sidebar_page
+        layout = side_composer.layout_metrics
 
-        sidebar_layout = side_composer.layout_metrics
-        expect(sidebar_layout[:main_right]).to be <= sidebar_layout[:composer_left]
-        expect(sidebar_layout[:horizontal_overflow]).to be(false)
+        expect(layout[:horizontal_overflow]).to be(false)
+        expect(layout[:main_width]).to be > 0
+      end
+    end
 
+    it "keeps the full-width layout inside the viewport without the sidebar" do
+      open_composer
+
+      resize_window(width: 1440) do
         set_sidebar_visibility(false)
-        expect(side_composer.sidebar_page?).to be(false)
+        layout = side_composer.layout_metrics
 
-        no_sidebar_layout = side_composer.layout_metrics
-        expect(no_sidebar_layout[:main_right]).to be <= no_sidebar_layout[:composer_left]
-        expect(no_sidebar_layout[:horizontal_overflow]).to be(false)
+        expect(layout[:horizontal_overflow]).to be(false)
+        expect(layout[:main_width]).to be > 0
       end
     end
 
